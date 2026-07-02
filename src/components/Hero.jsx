@@ -42,9 +42,9 @@ export default function Hero() {
     >
 
       {/* Background Glow */}
-      <div className="absolute -top-40 -left-40 h-105 w-105 rounded-full bg-cyan-500/15 blur-[150px]" />
-      <div className="absolute top-1/2 -right-40 h-95 w-95 rounded-full bg-purple-500/15 blur-[150px]" />
-      <div className="absolute bottom-0 left-1/2 h-80 w-[320px] -translate-x-1/2 rounded-full bg-emerald-400/10 blur-[130px]" />
+      <div className="absolute pointer-events-none -top-40 -left-40 h-105 w-105 rounded-full bg-cyan-500/15 blur-[150px]" />
+      <div className="absolute pointer-events-none top-1/2 -right-40 h-95 w-95 rounded-full bg-purple-500/15 blur-[150px]" />
+      <div className="absolute pointer-events-none bottom-0 left-1/2 h-80 w-[320px] -translate-x-1/2 rounded-full bg-emerald-400/10 blur-[130px]" />
 
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
@@ -65,10 +65,9 @@ export default function Hero() {
               IqBaL
             </span>
           </h1>
-
-          <p className="text-base sm:text-lg text-gray-400 mb-10 max-w-md mx-auto lg:mx-0 leading-relaxed">
-            I excel at crafting elegant digital experiences and I am proficient in various programming languages and technologies.
-          </p>
+            <p className="text-base sm:text-lg text-gray-400 mb-10 max-w-md mx-auto lg:mx-0 leading-relaxed">
+              I specialize in building fast, user-friendly web applications. I use the latest tools and technologies for designing great user experiences..
+            </p>
 
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-6">
@@ -166,3 +165,5 @@ export default function Hero() {
     </section>
   )
 }
+
+
