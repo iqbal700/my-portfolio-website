@@ -1,7 +1,7 @@
 // src/components/Projects.jsx
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight, ArrowLeft, ArrowRight } from 'lucide-react'
 import Image from 'next/image'
@@ -39,6 +39,22 @@ export default function Projects() {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + projectList.length) % projectList.length)
   }
 
+  // Auto-slider effect for mobile view
+  useEffect(() => {
+    // Check if window is defined (SSR safety) and if screen is mobile (< 1024px)
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024
+
+    if (!isMobile) return
+
+    // Set auto slide interval (e.g., 5000ms = 5 seconds)
+    const interval = setInterval(() => {
+      handleNext()
+    }, 5000)
+
+    // Clear interval when the component unmounts or index changes to avoid memory leaks/double-firing
+    return () => clearInterval(interval)
+  }, [currentIndex]) // Dependencies ensure interval resets properly if user manually taps a nav arrow
+
   const currentProject = projectList[currentIndex]
 
   const textVariants = {
@@ -58,7 +74,7 @@ export default function Projects() {
       id="projects"
       className="py-14 px-6 max-w-5xl mx-auto text-white font-sans relative overflow-hidden rounded-2xl"
     >
-      {/* Glass + Gradient Background (inside container only) */}
+      {/* Glass + Gradient Background */}
       <div className="absolute inset-0 bg-linear-to-br from-cyan-500/10 via-[#1a1921]/60 to-purple-500/10 backdrop-blur-2xl -z-10" />
 
       {/* Glow blobs */}
