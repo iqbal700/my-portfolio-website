@@ -1,210 +1,103 @@
-// src/components/Projects.jsx
 'use client'
 
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowUpRight, ArrowLeft, ArrowRight } from 'lucide-react'
-import Image from 'next/image'
+import { motion } from 'framer-motion'
+import { Briefcase, GraduationCap } from 'lucide-react'
 
-const projectList = [
-  { 
-    title: 'EventMaster Platform', 
-    tags: ['Next.js', 'Tailwind', 'daisyUI', 'MongoDB'], 
-    desc: 'Complete high-performance event management web application optimized for swift layout rendering. Features fully responsive interface modules and structured real-time updates.',
-    liveLink: '#',
-    githubLink: '#',
-    image: '/HeroImg.jpeg' 
+const practicalExperience = [
+  {
+    role: 'Full-Stack MERN Developer',
+    company: 'ZapShift (Parcel Delivery Platform)',
+    year: '2025 - Present',
+    desc: 'Engineered a full-stack logistics application featuring real-time package tracking, automated cost calculation, secure payment integration, and dynamic dashboard views.'
   },
-  { 
-    title: 'RedHero System', 
-    tags: ['React', 'Node.js', 'MongoDB', 'Express'], 
-    desc: 'Comprehensive management solution built to streamline blood bank tracking structures securely. Includes robust dashboard tools, quick database querying, and role-based permissions.',
-    liveLink: '#',
-    githubLink: '#',
-    image: '/HeroImg.jpeg' 
+  {
+    role: 'Full-Stack Developer',
+    company: 'RedHero (Blood Donation Network)',
+    year: '2025',
+    desc: 'Developed a community platform connecting donors with patients, featuring location-based search, blood group filtering, donor availability status, and request management.'
+  },
+  {
+    role: 'Full-Stack Developer',
+    company: 'PetCare (Pet Services & Adoption Platform)',
+    year: '2024 - 2025',
+    desc: 'Built a responsive web app for pet care scheduling and adoption services with user authentication, booking management, and reactive UI elements using DaisyUI.'
   }
 ]
 
-export default function Projects() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [direction, setDirection] = useState(0) 
-
-  const handleNext = () => {
-    setDirection(1)
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % projectList.length)
+const education = [
+  { 
+    degree: 'MERN Stack Development', 
+    institution: 'Programming Hero', 
+    year: '2025', 
+    desc: 'Completed intensive full-stack web development training, mastering MongoDB, Express.js, React, and Node.js through production-grade project builds.' 
+  },
+  { 
+    degree: 'English Language & Literature', 
+    institution: 'International Islamic University Chittagong', 
+    year: 'Ongoing', 
+    desc: 'Developing strong analytical skills, critical thinking, structural writing, and effective professional communication.' 
   }
+]
 
-  const handlePrev = () => {
-    setDirection(-1)
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + projectList.length) % projectList.length)
-  }
-
-  // Auto-slider effect for mobile view
-  useEffect(() => {
-    // Check if window is defined (SSR safety) and if screen is mobile (< 1024px)
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024
-
-    if (!isMobile) return
-
-    // Set auto slide interval (e.g., 5000ms = 5 seconds)
-    const interval = setInterval(() => {
-      handleNext()
-    }, 5000)
-
-    // Clear interval when the component unmounts or index changes to avoid memory leaks/double-firing
-    return () => clearInterval(interval)
-  }, [currentIndex]) // Dependencies ensure interval resets properly if user manually taps a nav arrow
-
-  const currentProject = projectList[currentIndex]
-
-  const textVariants = {
-    initial: (dir) => ({ opacity: 0, x: dir > 0 ? -30 : 30 }),
-    animate: { opacity: 1, x: 0, transition: { duration: 0.4, ease: 'easeOut' } },
-    exit: (dir) => ({ opacity: 0, x: dir > 0 ? 30 : -30, transition: { duration: 0.25 } })
-  }
-
-  const imageVariants = {
-    initial: (dir) => ({ opacity: 0, x: dir > 0 ? 30 : -30, scale: 0.98 }),
-    animate: { opacity: 1, x: 0, scale: 1, transition: { duration: 0.4, ease: 'easeOut' } },
-    exit: (dir) => ({ opacity: 0, x: dir > 0 ? -30 : 30, scale: 0.98, transition: { duration: 0.25 } })
-  }
-
+export default function Resume() {
   return (
-    <section
-      id="projects"
-      className="py-14 px-6 max-w-5xl mx-auto text-white font-sans relative overflow-hidden rounded-2xl"
-    >
-      {/* Glass + Gradient Background */}
-      <div className="absolute inset-0 bg-linear-to-br from-cyan-500/10 via-[#1a1921]/60 to-purple-500/10 backdrop-blur-2xl -z-10" />
-
-      {/* Glow blobs */}
-      <div className="absolute -top-20 -left-20 h-60 w-60 bg-cyan-400/20 blur-[120px] rounded-full" />
-      <div className="absolute -bottom-20 -right-20 h-60 w-60 bg-purple-500/20 blur-[120px] rounded-full" />
-
-      {/* Header */}
-      <div className="flex flex-col mb-10 text-center lg:text-left relative z-10">
-        <span className="text-xs font-mono tracking-wider text-gray-400 uppercase">
-          My Work
-        </span>
-        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mt-1 text-white">
-          Featured Projects<span className="text-cyan-300">.</span>
-        </h2>
+    <section id="resume" className="py-24 px-4 max-w-5xl mx-auto">
+      <div className="text-center mb-16">
+        <h2 className="text-3xl sm:text-4xl font-black mb-4">My Journey</h2>
+        <div className="h-1 w-12 bg-primary mx-auto rounded-full" />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-
-        {/* LEFT */}
-        <div className="lg:col-span-5 flex flex-col justify-between h-full order-2 lg:order-1">
-          <AnimatePresence mode="wait" custom={direction}>
-            <motion.div
-              key={currentIndex}
-              custom={direction}
-              variants={textVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              className="space-y-4"
-            >
-              <span className="text-5xl font-extrabold font-mono text-transparent bg-clip-text bg-linear-to-b from-white/20 to-transparent block">
-                {String(currentIndex + 1).padStart(2, '0')}
-              </span>
-
-              <h3 className="text-2xl sm:text-3xl font-bold text-white hover:text-cyan-300 transition-colors">
-                {currentProject.title}
-              </h3>
-
-              <p className="text-sm sm:text-base text-gray-300 leading-relaxed max-w-md">
-                {currentProject.desc}
-              </p>
-
-              <div className="flex flex-wrap gap-1.5 pt-1">
-                {currentProject.tags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="text-[11px] font-mono text-cyan-300 bg-cyan-400/10 border border-cyan-300/20 px-2.5 py-0.5 rounded-full"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              {/* FIXED ACTION BUTTONS */}
-              <div className="flex items-center gap-3 pt-3 border-t border-white/10">
-
-                {/* LIVE */}
-                <a
-                  href={currentProject.liveLink}
-                  target="_blank"
-                  className="flex items-center gap-2 px-3 py-2 rounded-full border border-cyan-300/30 text-cyan-300 hover:bg-cyan-300 hover:text-black transition-all text-xs font-mono"
-                >
-                  <ArrowUpRight className="w-4 h-4" />
-                  Live
-                </a>
-
-                {/* GITHUB */}
-                <a
-                  href={currentProject.githubLink}
-                  target="_blank"
-                  className="flex items-center gap-2 px-3 py-2 rounded-full border border-white/20 text-white hover:border-cyan-300 hover:text-cyan-300 transition-all text-xs font-mono"
-                >
-                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5 1 .1-.78.41-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.17 0 0 1-.32 3.3 1.23.96-.27 1.98-.4 3-.4s2.04.13 3 .4c2.28-1.55 3.28-1.23 3.28-1.23.65 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .32.22.69.82.58C20.56 21.8 24 17.3 24 12 24 5.37 18.63 0 12 0z"/>
-                  </svg>
-                  GitHub
-                </a>
-
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
-        {/* RIGHT IMAGE */}
-        <div className="lg:col-span-7 flex justify-center order-1 lg:order-2 w-full">
-          <div className="relative w-full aspect-16/10 max-w-xl mx-auto flex items-center justify-center rounded-xl border border-white/10 overflow-hidden backdrop-blur-xl bg-white/5">
-
-            <AnimatePresence mode="wait" custom={direction}>
-              <motion.div
-                key={currentIndex}
-                custom={direction}
-                variants={imageVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                className="relative w-full h-full"
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        {/* Experience / Projects Section */}
+        <div>
+          <div className="flex items-center gap-3 mb-8">
+            <Briefcase className="text-primary w-6 h-6" />
+            <h3 className="text-xl font-extrabold">Practical Experience</h3>
+          </div>
+          <div className="space-y-6 border-l border-base-300 pl-4 ml-3">
+            {practicalExperience.map((item, index) => (
+              <motion.div 
+                key={index} 
+                initial={{ opacity: 0, x: -10 }} 
+                whileInView={{ opacity: 1, x: 0 }} 
+                viewport={{ once: true }} 
+                className="relative"
               >
-                <Image
-                  src={currentProject.image}
-                  alt={currentProject.title}
-                  fill
-                  className="object-cover"
-                  priority
-                />
-
-                <div className="absolute inset-0 bg-linear-to-t from-[#070B14]/40 via-transparent to-transparent" />
+                <div className="absolute -left-[23px] top-1.5 w-3 h-3 rounded-full bg-primary" />
+                <span className="text-xs font-bold text-primary">{item.year}</span>
+                <h4 className="text-lg font-bold text-base-content">{item.role}</h4>
+                <p className="text-sm text-base-content/60 font-medium">{item.company}</p>
+                <p className="text-sm text-base-content/70 mt-2">{item.desc}</p>
               </motion.div>
-            </AnimatePresence>
+            ))}
           </div>
         </div>
 
+        {/* Education Section */}
+        <div>
+          <div className="flex items-center gap-3 mb-8">
+            <GraduationCap className="text-primary w-6 h-6" />
+            <h3 className="text-xl font-extrabold">Education & Training</h3>
+          </div>
+          <div className="space-y-6 border-l border-base-300 pl-4 ml-3">
+            {education.map((item, index) => (
+              <motion.div 
+                key={index} 
+                initial={{ opacity: 0, x: -10 }} 
+                whileInView={{ opacity: 1, x: 0 }} 
+                viewport={{ once: true }} 
+                className="relative"
+              >
+                <div className="absolute -left-[23px] top-1.5 w-3 h-3 rounded-full bg-primary" />
+                <span className="text-xs font-bold text-primary">{item.year}</span>
+                <h4 className="text-lg font-bold text-base-content">{item.degree}</h4>
+                <p className="text-sm text-base-content/60 font-medium">{item.institution}</p>
+                <p className="text-sm text-base-content/70 mt-2">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </div>
-
-      {/* NAV */}
-      <div className="flex justify-center lg:justify-start items-center gap-3 mt-8 pt-4 border-t border-white/10 relative z-10">
-        <button
-          onClick={handlePrev}
-          className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-cyan-300 hover:bg-cyan-300 hover:text-black transition-all"
-        >
-          <ArrowLeft className="w-4 h-4" />
-        </button>
-
-        <button
-          onClick={handleNext}
-          className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-cyan-300 hover:bg-cyan-300 hover:text-black transition-all"
-        >
-          <ArrowRight className="w-4 h-4" />
-        </button>
-      </div>
-
     </section>
   )
 }
