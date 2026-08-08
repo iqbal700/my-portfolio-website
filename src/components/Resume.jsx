@@ -1,3 +1,4 @@
+// src/components/Resume.jsx
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -47,12 +48,19 @@ export default function Resume() {
     setIsMounted(true)
   }, [])
 
+
   if (!isMounted) {
-    return null // Avoids SSR / Hydration mismatch errors in Next.js
+    return (
+      <section id='resume' className="py-24 px-4 max-w-5xl mx-auto">
+        <div className="text-center">
+          <h2 className="text-3xl sm:text-4xl font-black mb-4">Loading...</h2>
+        </div>
+      </section>
+    )
   }
 
   return (
-    <section id="resume" className="py-24 px-4 max-w-5xl mx-auto">
+    <section id='resume' className="py-24 px-4 max-w-5xl mx-auto">
       <div className="text-center mb-16">
         <h2 className="text-3xl sm:text-4xl font-black mb-4">My Journey</h2>
         <div className="h-1 w-12 bg-primary mx-auto rounded-full" />

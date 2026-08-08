@@ -1,3 +1,4 @@
+// src/components/Navbar.jsx
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
@@ -14,11 +15,11 @@ export default function Navbar() {
     { name: 'Skills', href: '#skills', id: 'skills' },
     { name: 'Projects', href: '#projects', id: 'projects' },
     { name: 'Services', href: '#services', id: 'services' },
-    { name: 'Resume', href: '#resume', id: 'resume' },
+    { name: 'Resume', href: '#resume', id: 'resume'},
     { name: 'Contact', href: '#contact', id: 'contact' },
   ]
 
-  // ACTIVE SECTION TRACK
+  // ACTIVE SECTION TRACK - IMPROVED
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -28,7 +29,11 @@ export default function Navbar() {
           }
         })
       },
-      { root: null, rootMargin: '-50% 0px -50% 0px', threshold: 0 }
+      { 
+        root: null, 
+        rootMargin: '-40% 0px -40% 0px', 
+        threshold: [0, 0.1, 0.2] 
+      }
     )
 
     navLinks.forEach((l) => {
@@ -39,7 +44,31 @@ export default function Navbar() {
     return () => observer.disconnect()
   }, [])
 
-  // ✅ MOBILE ONLY SCROLL HIDE
+ 
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = navLinks.map(link => document.getElementById(link.id))
+      const scrollPosition = window.scrollY + window.innerHeight / 2
+      
+      let currentSection = 'home'
+      sections.forEach((section, index) => {
+        if (section) {
+          const sectionTop = section.offsetTop
+          const sectionBottom = sectionTop + section.offsetHeight
+          if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+            currentSection = navLinks[index].id
+          }
+        }
+      })
+      
+      setActiveSection(currentSection)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  //MOBILE ONLY SCROLL HIDE
   useEffect(() => {
     const handleScroll = () => {
       const isMobile = window.innerWidth < 768
@@ -48,9 +77,9 @@ export default function Navbar() {
       const currentY = window.scrollY
 
       if (currentY > lastScrollY.current && currentY > 80) {
-        setShowNavbar(false) // scroll down
+        setShowNavbar(false)
       } else {
-        setShowNavbar(true) // scroll up
+        setShowNavbar(true)
       }
 
       lastScrollY.current = currentY
@@ -103,7 +132,7 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* DESKTOP NAV (UNCHANGED ALWAYS VISIBLE) */}
+          {/* DESKTOP NAV */}
           <nav className="hidden md:flex gap-6 text-sm">
             {navLinks.map((link) => (
               <a
