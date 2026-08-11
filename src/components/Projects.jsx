@@ -7,21 +7,30 @@ import { ArrowUpRight, ArrowLeft, ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 
 const projectList = [
-  { 
-    title: 'EventMaster Platform', 
-    tags: ['Next.js', 'Tailwind', 'daisyUI', 'MongoDB'], 
-    desc: 'Complete high-performance event management web application optimized for swift layout rendering. Features fully responsive interface modules and structured real-time updates.',
-    liveLink: '#',
-    githubLink: '#',
-    image: '/HeroImg.jpeg' 
-  },
-  { 
-    title: 'RedHero System', 
+    { 
+    title: 'RedHero', 
     tags: ['React', 'Node.js', 'MongoDB', 'Express'], 
-    desc: 'Comprehensive management solution built to streamline blood bank tracking structures securely. Includes robust dashboard tools, quick database querying, and role-based permissions.',
-    liveLink: '#',
-    githubLink: '#',
-    image: '/HeroImg.jpeg' 
+    desc: 'RedHero is a blood donation management platform designed to connect donors with urgent requests in real time. Features quick donor searching, blood request management, and custom dashboards for donors, volunteers, and admins.',
+    liveLink: 'https://redhero321.netlify.app',
+    githubLink: 'https://github.com/iqbal700/b12a11-backend.git',
+    image: '/PP1.png' 
+    },
+  { 
+    title: 'Zap shift', 
+    tags: ['Next.js', 'Tailwind', 'daisyUI', 'MongoDB'], 
+    desc: 'A full-stack product delivery web app featuring real-time parcel tracking, interactive booking workflows, live delivery status updates, and role-based admin controls.',
+    liveLink: 'https://zap-shift-client-ten.vercel.app/',
+    githubLink: 'https://github.com/iqbal700/zap-shift-client.git',
+    image: '/pp2.png' 
+  },
+
+  { 
+    title: 'PetCare', 
+    tags: ['React', 'Node.js', 'MongoDB', 'Express'], 
+    desc: 'PetCare is a comprehensive pet management platform designed to connect pet owners with essential veterinary and care services. Features streamlined appointment scheduling,and customized dashboards for owners, vets, and service providers.',
+    liveLink: 'https://mypetcare123.netlify.app',
+    githubLink: 'https://github.com/iqbal700/B12A10.git',
+    image: '/pp3.png' 
   }
 ]
 
