@@ -72,7 +72,7 @@ export default function Hero() {
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-6">
             <a
-              href="/public/resume_mern.pdf"
+              href="/resume_mern.pdf"
               download
               className="inline-flex items-center gap-2 border-2 border-cyan-400 text-cyan-400 px-8 py-3.5 rounded-full font-mono font-bold uppercase tracking-wider hover:bg-cyan-400 hover:text-slate-900 transition-all duration-300 hover:scale-105 active:scale-95"
             >
